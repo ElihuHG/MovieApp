@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
 
     private  val poster = mutableListOf<String >()
     private var nombres = mutableListOf<String>()
+    private var ids = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
     }
 
     private fun initRecyclerView(){
-        adapter = ViewAdapter(poster,nombres)
+        adapter = ViewAdapter(poster,nombres,ids)
         binding.rvMovies.layoutManager = GridLayoutManager(this,2)
         binding.rvMovies.adapter = adapter
 
@@ -68,10 +69,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
                         val getMovie = images[i].i
                         val getName = images[i].l
                         val getYear = images[i].y
+                        val getId = images[i].id
                         Log.d("nombre",getName)
                         val image = getMovie.imageUrl
                         nombres.add(getName.plus(" (" + getYear + ")"))
                         poster.add(image)
+                        ids.add(getId)
                         adapter.notifyDataSetChanged()
                     }
 
